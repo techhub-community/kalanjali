@@ -133,3 +133,18 @@ MY_STATIC = os.path.join(BASE_DIR,'mystatic') #MY STATIC FILES ARE HERE
 STATICFILES_DIRS = [
 	MY_STATIC,
 	]
+
+#paytm configs
+PAYTM_MERCHANT_COMPANY_NAME = "kalanjali"
+PAYTM_CHANNEL_ID = "WEB"
+PAYTM_EMAIL  = "abhi.chaurasia204@gmail.com"
+PAYTM_MOBILE = "7080294838"
+PAYTM_STAGING = True
+if PAYTM_STAGING:
+    PAYTM_MERCHANT_KEY = "RwH39SZTZUpQbJCY"
+    PAYTM_INDUSTRY_TYPE_ID = "Retail"
+    PAYTM_MERCHANT_ID = "NONESt79835244795367"
+    PAYTM_CALLBACK_URL = "http://localhost:8000/callback"
+    PAYTM_WEBSITE = "WEB_STAGING"
+    PAYTM_TRANSACTION_STATUS_URL = "https://pguat.paytm.com/oltp/HANDLER_INTERNAL/TXNSTATUS"
+    PAYTM_PAYMENT_GATEWAY_URL = "https://pguat.paytm.com/oltp-web/processTransaction"
