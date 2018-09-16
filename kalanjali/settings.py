@@ -144,7 +144,7 @@ if PAYTM_STAGING:
     PAYTM_MERCHANT_KEY = "RwH39SZTZUpQbJCY"
     PAYTM_INDUSTRY_TYPE_ID = "Retail"
     PAYTM_MERCHANT_ID = "NONESt79835244795367"
-    PAYTM_CALLBACK_URL = "http://localhost:8000/callback"
+    PAYTM_CALLBACK_URL = "http://127.0.0.1:8000/callback"
     PAYTM_WEBSITE = "WEB_STAGING"
     PAYTM_TRANSACTION_STATUS_URL = "https://pguat.paytm.com/oltp/HANDLER_INTERNAL/TXNSTATUS"
     PAYTM_PAYMENT_GATEWAY_URL = "https://pguat.paytm.com/oltp-web/processTransaction"
