@@ -148,3 +148,10 @@ if PAYTM_STAGING:
     PAYTM_WEBSITE = "WEBSTAGING"
     PAYTM_TRANSACTION_STATUS_URL = "https://pguat.paytm.com/oltp/HANDLER_INTERNAL/TXNSTATUS"
     PAYTM_PAYMENT_GATEWAY_URL = "https://pguat.paytm.com/oltp-web/processTransaction"
+
+#Email Integration
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'kalanjali'
+EMAIL_HOST_PASSWORD = 'devkala2018'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
