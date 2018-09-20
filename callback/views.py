@@ -6,14 +6,9 @@ from django.http import HttpResponse
 # Create your views here.
 @csrf_exempt
 def callback(request):
-    if request.method == "POST":
-        MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
+    if request.method == "GET":
         data_dict = {}
-        for key in request.POST:
-            data_dict[key] = request.POST[key]
-        verify = Checksum.verify_checksum(data_dict, MERCHANT_KEY, data_dict['CHECKSUMHASH'])
-        if verify:
-            return render(request,"callback/callback.html",{"paytm":data_dict})
-        else:
-            return HttpResponse("checksum verification failed!")
+        for key in request.GET:
+            data_dict[key] = request.GET[key]
+        return render(request,"callback/callback.html",{"paytm":data_dict})
     return HttpResponse("INVALID REQUEST",status=200)

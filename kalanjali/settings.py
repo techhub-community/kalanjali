@@ -134,24 +134,15 @@ STATICFILES_DIRS = [
 	MY_STATIC,
 	]
 
-#paytm configs
-PAYTM_MERCHANT_COMPANY_NAME = "kalanjali"
-PAYTM_CHANNEL_ID = "WEB"
-PAYTM_EMAIL  = "abhi.chaurasia204@gmail.com"
-PAYTM_MOBILE = "7080294838"
-PAYTM_STAGING = True
-if PAYTM_STAGING:
-    PAYTM_MERCHANT_KEY = "RwH39SZTZUpQbJCY"
-    PAYTM_MERCHANT_ID = "NONESt79835244795367"
-    PAYTM_CALLBACK_URL = "http://206.189.133.171/callback/"
-    PAYTM_INDUSTRY_TYPE_ID = "Retail"
-    PAYTM_WEBSITE = "WEBSTAGING"
-    PAYTM_TRANSACTION_STATUS_URL = "https://pguat.paytm.com/oltp/HANDLER_INTERNAL/TXNSTATUS"
-    PAYTM_PAYMENT_GATEWAY_URL = "https://pguat.paytm.com/oltp-web/processTransaction"
-
 #Email Integration
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'kalanjali'
 EMAIL_HOST_PASSWORD = 'devkala2018'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+#IMojo Configuration
+# Test Credentials
+IMOJO_API_KEY = "test_c1a3834e5b44dd4127e499367fb"
+IMOJO_AUTH_TOKEN = "test_92a2966175aa85d158ab91d8ea1"
+IMOJO_ENDPOINT = "https://test.instamojo.com/api/1.1/"

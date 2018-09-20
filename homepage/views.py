@@ -1,30 +1,47 @@
 from django.shortcuts import render
 from . import Checksum
 import uuid
+from instamojo_wrapper import Instamojo
 from django.conf import settings
-from django.http import HttpResponse
+
+from django.http import HttpResponse,HttpResponseRedirect
 # Create your views here.
 
 def homepage(request):
-	# MERCHANT_KEY = "RwH39SZTZUpQbJCY"
-	# MERCHANT_ID = "NONESt79835244795367"
-	# CALLBACK_URL ='http://206.189.133.171/callback/'
-	PAYTM_ORDER_ID = str(uuid.uuid4())
-	PAYTM_CUST_ID = str(uuid.uuid4())
-	bill_amount = 2
-	if bill_amount:
-		data_dict = {
-		'MID':settings.PAYTM_MERCHANT_ID,
-		"ORDER_ID":PAYTM_ORDER_ID,
-		"CUST_ID":PAYTM_CUST_ID,
-		'TXN_AMOUNT':str(bill_amount),
-		'INDUSTRY_TYPE_ID':settings.PAYTM_INDUSTRY_TYPE_ID,
-		'WEBSITE':settings.PAYTM_WEBSITE,
-		'CHANNEL_ID':settings.PAYTM_CHANNEL_ID,
-		'CALLBACK_URL':settings.PAYTM_CALLBACK_URL,
-		}
-		param_dict = data_dict
-		param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, settings.PAYTM_MERCHANT_KEY)
-		return render(request,"homepage/index.html",{'paytmdict':param_dict})
+
+	server_dict = {
+	"amount" : "50",
+	"redirect_url" : 'http://206.189.133.171/callback/',
+	}
+
+	if request.method == "POST":
+		posted = request.POST
+		#validate The form here
+		#generate key here
+		api = Instamojo(
+			api_key=settings.IMOJO_API_KEY,
+			auth_token=settings.IMOJO_AUTH_TOKEN,
+			endpoint=settings.IMOJO_ENDPOINT,
+			)
+		response = api.payment_request_create(
+			buyer_name = posted['buyer_name'],
+			email = posted['email'],
+			phone = posted['phone'],
+			purpose = posted['purpose'],
+			amount = server_dict['amount'],
+			redirect_url = server_dict['redirect_url'],
+		)
+		#check if successfull and redirect accordingly
+		if response['success']:
+			print("\n\nsuccess\n"+response['payment_request']['longurl'])
+			return HttpResponseRedirect(response['payment_request']['longurl'])
+		else:
+			return HttpResponse(response['message'])
 	else:
-		return HttpResponse("Bill Amount Could not find. ?bill_amount=2")
+		user_dict = {
+		"buyer_name" : "Rahul Jaiswal",
+		"email" : "itsauselessid@gmail.com",
+		"phone" : "9916743175",
+		"purpose" : "Testing",
+		}
+		return render(request,"homepage/index.html",{'form_dict':user_dict})

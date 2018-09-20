@@ -5,15 +5,12 @@
 </head>
 <body>
  HOMEPAGE OF THE SITE
- <form method="post" action="https://securegw-stage.paytm.in/theia/processTransaction" name="f1">
- <table border="1">
- <tbody>
- {% for key,value in paytmdict.items %}
-     <input type="hidden" name="{{key}}" value="{{value}}">
+ <form method="post" action="/" name="f1">
+	{% csrf_token %}
+ {% for key,value in form_dict.items %}
+	<input name="{{key}}" value="{{value}}">
  {% endfor %}
- </tbody>
- </table>
- <button type="submit" name="button">LOLA</button>
+ <button type="submit" name="button">Pay Rs50</button>
  </form>
 </body>
 </html>
