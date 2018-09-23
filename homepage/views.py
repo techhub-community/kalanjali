@@ -8,6 +8,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 
 from .forms import RegistrationForm
 from .models import RegistrationModel
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 #
 import urllib.request
@@ -57,7 +58,7 @@ def homepage(request):
 		"purpose" : "Testing",
 		}
 		return render(request,"homepage/index.html",{'form_dict':user_dict})
-
+@csrf_exempt
 def msg_api(request):
 	if request.method == "GET":
 		return render(request,"homepage/index.html",{'form':RegistrationForm})
