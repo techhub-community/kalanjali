@@ -5,12 +5,25 @@
 </head>
 <body>
  HOMEPAGE OF THE SITE
- <form method="post" action="/" name="f1">
+ <!-- <form method="post" action="/" name="f1">
 	{% csrf_token %}
  {% for key,value in form_dict.items %}
 	<input name="{{key}}" value="{{value}}">
  {% endfor %}
- <button type="submit" name="button">Pay Rs50</button>
- </form>
+ <button type="submit" name="button">Send Message</button>
+ </form> -->
+ 	<form action="/" method="post">
+		{% csrf_token %}
+		{% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+				{{field.label_tag}}{{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+{% endfor %}
+		<input type="submit" name="DONE" value="DONE">
+</form>
 </body>
 </html>
