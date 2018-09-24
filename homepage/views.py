@@ -27,20 +27,24 @@ def register(request):
     if request.method == "GET":
         return HttpResponseRedirect("/admin")
     elif request.method == "POST":
+        # print(request.POST)
         user_form = RegistrationForm(request.POST)
         event = request.POST['event_selected']
         email = request.POST['email']
-        #add txn_id check here
+        # add txn_id check here
         if RegistrationModel.objects.filter(txn_id=request.POST['txn_id']):
             return HttpResponse("Transaction Id is Already Registered!")
         if user_form.is_valid():
+            # event = user_form.cleaned_data['event_selected']
+            # email = user_form.cleaned_data['email']
             new_data = RegistrationModel(
                 name = user_form.cleaned_data['name'],
                 phone = user_form.cleaned_data['phone'],
-                email = user_form.cleaned_data['email'],
+                email = email,
                 college = user_form.cleaned_data['college'],
                 year = user_form.cleaned_data['year'],
-                event = user_form.cleaned_data['event_selected'],
+                # event = user_form.cleaned_data['event_selected'],
+                event = event,
                 txn_id = user_form.cleaned_data['txn_id'],
             )
             new_data.save()
