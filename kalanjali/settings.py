@@ -39,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'homepage.apps.HomepageConfig',
     'callback.apps.CallbackConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -146,3 +148,7 @@ EMAIL_USE_TLS = True
 IMOJO_API_KEY = "test_c1a3834e5b44dd4127e499367fb"
 IMOJO_AUTH_TOKEN = "test_92a2966175aa85d158ab91d8ea1"
 IMOJO_ENDPOINT = "https://test.instamojo.com/api/1.1/"
+
+#CORS settings
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = ("")

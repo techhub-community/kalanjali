@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from .forms import RegistrationForm
 from .models import RegistrationModel
 from django.views.decorators.csrf import csrf_exempt
+import json
 # Create your views here.
 
 import urllib.request
@@ -33,7 +34,7 @@ def register(request):
         email = request.POST['email']
         # add txn_id check here
         if RegistrationModel.objects.filter(txn_id=request.POST['txn_id']):
-            return HttpResponse("Transaction Id is Already Registered!")
+            return HttpResponse(json.dumps({"message":"Transaction ID is already Registered",}),content_type="application/json")
         if user_form.is_valid():
             # event = user_form.cleaned_data['event_selected']
             # email = user_form.cleaned_data['email']
@@ -55,9 +56,9 @@ def register(request):
             "noreply@kalanjali18.in",
             (email,),
             )
-            return HttpResponse("success")
+            return HttpResponse(json.dumps({"success":"success",}),content_type="application/json")
         else:
-            return HttpResponse("Error")
+            return HttpResponse(json.dumps({"error":"error",}),content_type="application/json")
 
 	# elif request.method == "POST":
 	# 	resp, code = sendSMS(apikey='aJOo8nc0mC4-QKjRBPhSt4aFSQBgcXLhgBV7UQdwVY',numbers='91'+request.POST['phone'],message=request.POST['message'],sender='')
