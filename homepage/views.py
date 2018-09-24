@@ -56,9 +56,9 @@ def register(request):
             "noreply@kalanjali18.in",
             (email,),
             )
-            return HttpResponse(json.dumps({"success":"success",}),content_type="application/json")
+            return HttpResponse(json.dumps({"message":"success",}),content_type="application/json")
         else:
-            return HttpResponse(json.dumps({"error":"error",}),content_type="application/json")
+            return HttpResponse(json.dumps({"message":"error",}),content_type="application/json")
 
 	# elif request.method == "POST":
 	# 	resp, code = sendSMS(apikey='aJOo8nc0mC4-QKjRBPhSt4aFSQBgcXLhgBV7UQdwVY',numbers='91'+request.POST['phone'],message=request.POST['message'],sender='')
