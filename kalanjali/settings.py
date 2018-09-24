@@ -25,7 +25,7 @@ SECRET_KEY = '*pp1))xrin3%)m-z2vs)^3&lrmxb6%u$vke66_bottr$2ma9+)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['206.189.133.171','127.0.0.1']
+ALLOWED_HOSTS = ['206.189.133.171','127.0.0.1','www.kalanjali.gq']
 
 
 # Application definition
