@@ -59,6 +59,8 @@ def register(request):
             (email,),
             )
             return HttpResponse(json.dumps({"message":"success",}),content_type="application/json")
+        elif request.POST['coord_id'] == '':
+            return HttpResponse(json.dumps({"message":"No Coordinator ID",}),content_type="application/json")
         else:
             return HttpResponse(json.dumps({"message":"error",}),content_type="application/json")
 
