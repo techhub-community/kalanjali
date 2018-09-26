@@ -25,7 +25,7 @@ SECRET_KEY = '*pp1))xrin3%)m-z2vs)^3&lrmxb6%u$vke66_bottr$2ma9+)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['206.189.133.171','127.0.0.1','www.kalanjali.gq','register.kalanjali.gq']
+ALLOWED_HOSTS = ['206.189.133.171','127.0.0.1','www.kalanjali.gq']
 
 
 # Application definition
@@ -39,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'homepage.apps.HomepageConfig',
     'callback.apps.CallbackConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -146,3 +148,7 @@ EMAIL_USE_TLS = True
 IMOJO_API_KEY = "test_c1a3834e5b44dd4127e499367fb"
 IMOJO_AUTH_TOKEN = "test_92a2966175aa85d158ab91d8ea1"
 IMOJO_ENDPOINT = "https://test.instamojo.com/api/1.1/"
+
+#CORS settings
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = ("")

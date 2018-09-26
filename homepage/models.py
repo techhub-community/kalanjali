@@ -1,16 +1,18 @@
 from django.db import models
 from django import forms
-from django.core.validators import MinValueValidator,MaxValueValidator
 
 # Create your models here.
 class RegistrationModel(models.Model):
-    name = models.CharField(max_length=20)
+    number = models.IntegerField(default=0)
+    coord_id = models.CharField(default="Nil",max_length=30)
+    name = models.CharField(max_length=30)
     phone = models.CharField(max_length=11)
     email = models.CharField(max_length=50)
     college = models.CharField(max_length=50)
     year = models.IntegerField()
-    event = models.CharField(max_length=20)
-    txn_id = models.CharField(max_length=30,primary_key=True)
+    event = models.CharField(max_length=30)
+    txn_id = models.CharField(max_length=50,primary_key=True)
+    amount = models.IntegerField(default=0)
     verified = models.BooleanField(default=False)
 
 

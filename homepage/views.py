@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from .forms import RegistrationForm
 from .models import RegistrationModel
 from django.views.decorators.csrf import csrf_exempt
+import json
 # Create your views here.
 
 import urllib.request
@@ -27,21 +28,27 @@ def register(request):
     if request.method == "GET":
         return HttpResponseRedirect("/admin")
     elif request.method == "POST":
+        # print(request.POST)
         user_form = RegistrationForm(request.POST)
         event = request.POST['event_selected']
         email = request.POST['email']
-        #add txn_id check here
+        # add txn_id check here
         if RegistrationModel.objects.filter(txn_id=request.POST['txn_id']):
-            return HttpResponse("Transaction Id is Already Registered!")
+            return HttpResponse(json.dumps({"message":"Transaction ID is already Registered",}),content_type="application/json")
         if user_form.is_valid():
+            # event = user_form.cleaned_data['event_selected']
+            # email = user_form.cleaned_data['email']
             new_data = RegistrationModel(
+                number = len(RegistrationModel.objects.all())+1,
+                coord_id = user_form.cleaned_data['coord_id'],
                 name = user_form.cleaned_data['name'],
                 phone = user_form.cleaned_data['phone'],
-                email = user_form.cleaned_data['email'],
+                email = email,
                 college = user_form.cleaned_data['college'],
                 year = user_form.cleaned_data['year'],
-                event = user_form.cleaned_data['event_selected'],
+                event = event,
                 txn_id = user_form.cleaned_data['txn_id'],
+                amount = user_form.cleaned_data['amount']
             )
             new_data.save()
             #send Email
@@ -51,9 +58,9 @@ def register(request):
             "noreply@kalanjali18.in",
             (email,),
             )
-            return HttpResponse("success")
+            return HttpResponse(json.dumps({"message":"success",}),content_type="application/json")
         else:
-            return HttpResponse("Error")
+            return HttpResponse(json.dumps({"message":"error",}),content_type="application/json")
 
 	# elif request.method == "POST":
 	# 	resp, code = sendSMS(apikey='aJOo8nc0mC4-QKjRBPhSt4aFSQBgcXLhgBV7UQdwVY',numbers='91'+request.POST['phone'],message=request.POST['message'],sender='')
