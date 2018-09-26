@@ -2,9 +2,11 @@ from django.contrib import admin
 from .models import RegistrationModel
 # # Register your models here.
 #
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('name','email','phone','college','event','txn_id','verified')
-    search_fields = ('name','email','phone','college','event','txn_id','verified')
-    # readonly_fields = ('name','email','phone','txn_id','event',)
 #
+details_fields = ['number','name','email','phone','college','year','event','coord_id','txn_id','amount']
+display_fields = details_fields + ['verified',]
+class UserAdmin(admin.ModelAdmin):
+    list_display = display_fields
+    search_fields = display_fields
+    readonly_fields = details_fields
 admin.site.register(RegistrationModel,UserAdmin)

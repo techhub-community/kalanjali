@@ -39,14 +39,16 @@ def register(request):
             # event = user_form.cleaned_data['event_selected']
             # email = user_form.cleaned_data['email']
             new_data = RegistrationModel(
+                number = len(RegistrationModel.objects.all())+1,
+                coord_id = user_form.cleaned_data['coord_id'],
                 name = user_form.cleaned_data['name'],
                 phone = user_form.cleaned_data['phone'],
                 email = email,
                 college = user_form.cleaned_data['college'],
                 year = user_form.cleaned_data['year'],
-                # event = user_form.cleaned_data['event_selected'],
                 event = event,
                 txn_id = user_form.cleaned_data['txn_id'],
+                amount = user_form.cleaned_data['amount']
             )
             new_data.save()
             #send Email
