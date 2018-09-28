@@ -22,7 +22,7 @@ def sendSMS(apikey, numbers, sender, message):
         + urllib.parse.urlencode(params))
     return (f.read(), f.code)
 
-def sendEmail(email,event,name,phone,college,year,txn_id):
+def sendEmail(email,event,name,phone,college,year,txn_id,amount):
     html_template = '''<p>Thank You for registering yourself for the event : <b>{event}</b> </p>
     <p>Your Registration details are :</p>
     <ul>
@@ -31,7 +31,8 @@ def sendEmail(email,event,name,phone,college,year,txn_id):
     	<li>Phone : {phone}</li>
     	<li>College : {college}</li>
     	<li>Year : {year}</li>
-    	<li>UPI Transaction ID : {txn_id}</li>
+        <li>Paid Amount : {amount}</li>
+        <li>UPI Transaction ID : {txn_id}</li>
     </ul>
     <b>Note:</b>
     <ol style="margin-left:1em">
@@ -43,7 +44,7 @@ def sendEmail(email,event,name,phone,college,year,txn_id):
     	<li>Event location :- http://bit.ly/2IkjdID</li>
     </ol>
     <br>
-    Regards,<br>Team Kalanjali'''.format(event=event,name=name,email=email,phone=phone,college=college,year=year,txn_id=txn_id)
+    Regards,<br>Team Kalanjali'''.format(event=event,name=name,email=email,phone=phone,college=college,year=year,txn_id=txn_id,amount=amount)
     msg = EmailMessage("Registration successful!",html_template,"admin@kalanjali18.in",[email,])
     msg.content_subtype = "html"
     check = msg.send()
@@ -81,7 +82,7 @@ def register(request):
             )
             new_data.save()
             #send Email
-            sendEmail(email,event,name=user_form.cleaned_data['name'],phone=user_form.cleaned_data['phone'],college=user_form.cleaned_data['college'],year=user_form.cleaned_data['year'],txn_id=user_form.cleaned_data['txn_id'])
+            sendEmail(email,event,name=user_form.cleaned_data['name'],phone=user_form.cleaned_data['phone'],college=user_form.cleaned_data['college'],year=user_form.cleaned_data['year'],txn_id=user_form.cleaned_data['txn_id'],amount=user_form.cleaned_data['amount'])
             return HttpResponse(json.dumps({"message":"success",}),content_type="application/json")
         elif request.POST['coord_id'] == '':
             return HttpResponse(json.dumps({"message":"No Coordinator ID",}),content_type="application/json")
