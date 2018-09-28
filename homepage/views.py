@@ -5,7 +5,7 @@ from instamojo_wrapper import Instamojo
 from django.conf import settings
 
 from django.http import HttpResponse,HttpResponseRedirect
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
 from .forms import RegistrationForm
 from .models import RegistrationModel
@@ -22,6 +22,35 @@ def sendSMS(apikey, numbers, sender, message):
         + urllib.parse.urlencode(params))
     return (f.read(), f.code)
 
+def sendEmail(email,event,name,phone,college,year,txn_id):
+    html_template = '''<p>Thank You for registering yourself for the event : <b>{event}</b> </p>
+    <p>Your Registration details are :</p>
+    <ul>
+    	<li>Name : {name}</li>
+    	<li>Email : {email}</li>
+    	<li>Phone : {phone}</li>
+    	<li>College : {college}</li>
+    	<li>Year : {year}</li>
+    	<li>UPI Transaction ID : {txn_id}</li>
+    </ul>
+    <b>Note:</b>
+    <ol style="margin-left:1em">
+    	<li>You Will Get A Confirmation SMS Upon Successful Payment Verification On Your Registered Mobile No.</li>
+    	<li>If You Have Any Queries Regarding Mismatch Of TRANSACTION ID Or Any Other Data Then Visit:- http://bit.ly/2zA8DdF</li>
+    	<li>For Downloading Brochure Of Kalanjali-2018 :- http://bit.ly/2R4snwH</li>
+    	<li>For Rules and Regulations Of Kalanjali-2018 :-  http://bit.ly/2N01GpP</li>
+    	<li>For Event Shedule Of Kalanjali-2018 :-  http://bit.ly/2N63nlG</li>
+    	<li>Event location :- http://bit.ly/2IkjdID</li>
+    </ol>
+    <br>
+    Regards,<br>Team Kalanjali'''.format(event=event,name=name,email=email,phone=phone,college=college,year=year,txn_id=txn_id)
+    msg = EmailMessage("Registration successful!",html_template,"admin@kalanjali18.in",[email,])
+    msg.content_subtype = "html"
+    check = msg.send()
+    if check!=1:
+        email_error_file = open('logs/email_error_log.log','a')
+        email_error_file.write("Error For Email : {0}\terror code:{1}".format(email,str(check)))
+        email_error_file.close()
 
 @csrf_exempt
 def register(request):
@@ -52,12 +81,7 @@ def register(request):
             )
             new_data.save()
             #send Email
-            send_mail(
-            "Registration successful!",
-            "You Have successfully Registered for Event : {0}".format(event),
-            "noreply@kalanjali18.in",
-            (email,),
-            )
+            sendEmail(email,event,name=user_form.cleaned_data['name'],phone=user_form.cleaned_data['phone'],college=user_form.cleaned_data['college'],year=user_form.cleaned_data['year'],txn_id=user_form.cleaned_data['txn_id'])
             return HttpResponse(json.dumps({"message":"success",}),content_type="application/json")
         elif request.POST['coord_id'] == '':
             return HttpResponse(json.dumps({"message":"No Coordinator ID",}),content_type="application/json")
