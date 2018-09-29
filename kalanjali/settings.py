@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'callback.apps.CallbackConfig',
     'corsheaders',
+    'dev.apps.DevConfig',
 ]
 
 MIDDLEWARE = [

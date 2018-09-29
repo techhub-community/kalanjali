@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('homepage.urls')),
     path('callback/',include('callback.urls')),
+    path('dev/',include('dev.urls')),
 ]
