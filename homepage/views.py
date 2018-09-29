@@ -37,14 +37,17 @@ def sendEmail(email,event,name,phone,college,year,txn_id,amount):
     <b>Note:</b>
     <ol style="margin-left:1em">
     	<li>You Will Get A Confirmation SMS Upon Successful Payment Verification On Your Registered Mobile No.</li>
-    	<li>If You Have Any Queries Regarding Mismatch Of TRANSACTION ID Or Any Other Data Then Visit:- http://bit.ly/2zA8DdF</li>
-    	<li>For Downloading Brochure Of Kalanjali-2018 :- http://bit.ly/2R4snwH</li>
-    	<li>For Rules and Regulations Of Kalanjali-2018 :-  http://bit.ly/2N01GpP</li>
-    	<li>For Event Shedule Of Kalanjali-2018 :-  http://bit.ly/2N63nlG</li>
-    	<li>Event location :- http://bit.ly/2IkjdID</li>
+    	<li>If You Have Any Queries Regarding Mismatch Of TRANSACTION ID Or Any Other Data Then Visit:- <a href="http://bit.ly/2zA8DdF">http://bit.ly/2zA8DdF</a></li>
+    	<li>For Downloading Brochure Of Kalanjali-2018 :- <a href="http://bit.ly/2R4snwH">http://bit.ly/2R4snwH</a></li>
+    	<li>For Rules and Regulations Of Kalanjali-2018 :-  <a href="http://bit.ly/2N01GpP">http://bit.ly/2N01GpP</a></li>
+    	<li>For Event Shedule Of Kalanjali-2018 :-  <a href="http://bit.ly/2N63nlG">http://bit.ly/2N63nlG</a></li>
+    	<li>Event location :- <a href="http://bit.ly/2IkjdID">http://bit.ly/2IkjdID</a></li>
     </ol>
     <br>
-    Regards,<br>Team Kalanjali'''.format(event=event,name=name,email=email,phone=phone,college=college,year=year,txn_id=txn_id,amount=amount)
+    Regards,<br>Team Kalanjali
+    <br><br><span style="font-size:0.7em">Managed By :- TechHub (www.techhub.pro)<br>Coding and Innovation Club of Sir MVIT</span>
+
+    '''.format(event=event,name=name,email=email,phone=phone,college=college,year=year,txn_id=txn_id,amount=amount)
     msg = EmailMessage("Registration successful!",html_template,"admin@kalanjali18.in",[email,])
     msg.content_subtype = "html"
     check = msg.send()
