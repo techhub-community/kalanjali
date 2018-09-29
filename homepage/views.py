@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 # Create your views here.
 
-import urllib.request
+import urllib.request as urlRequest
 import urllib.parse
 
 def sendSMS(apikey, numbers, sender, message):
@@ -45,7 +45,7 @@ def sendEmail(email,event,name,phone,college,year,txn_id,amount):
     </ol>
     <br>
     Regards,<br>Team Kalanjali
-    <br><br><span style="font-size:0.7em">Managed By :- TechHub (www.techhub.pro)<br>Coding and Innovation Club of Sir MVIT</span>
+    <br><br><span style="font-size:0.7em">Managed By :- TechHub (<a href="http://www.techhub.pro">www.techhub.pro</a>)<br>Coding and Innovation Club of Sir MVIT</span>
 
     '''.format(event=event,name=name,email=email,phone=phone,college=college,year=year,txn_id=txn_id,amount=amount)
     msg = EmailMessage("Registration successful!",html_template,"admin@kalanjali18.in",[email,])
@@ -65,7 +65,7 @@ def register(request):
         event = request.POST['event_selected']
         email = request.POST['email']
         if 'g-recaptcha-response' not in request.POST.keys() or request.POST['g-recaptcha-response'] == '':
-            return HttpResponse(json.dumps({"message":"Captcha Verification Failed",}),content_type="application/json")
+            return HttpResponse(json.dumps({"message":"Captcha Verification Failed!",}),content_type="application/json")
         # add txn_id check here
         if RegistrationModel.objects.filter(txn_id=request.POST['txn_id']):
             return HttpResponse(json.dumps({"message":"Transaction ID is already Registered",}),content_type="application/json")
