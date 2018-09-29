@@ -31,20 +31,17 @@ def devview(request):
         if user_form.is_valid():
             recaptcha_response = request.POST['g-recaptcha-response']
             values = {
-                'secret' : "6LfhvHIUAAAAALdo3dY_Ztr6yty-rXyJ2GK-Ti7-",
+                'secret' : "6LcIvnIUAAAAAJumlie4zUhQy4y7I20ufzCvOrxF", #ABHI's key
                 'response' : recaptcha_response,
             }
-            data = urllib.urlencode(values)
-            req = urlRequest.Request(url, data)
+            data = urllib.parse.urlencode(values)
+            data = data.encode('utf-8')
+            apiurl = "https://www.google.com/recaptcha/api/siteverify"
+            req = urlRequest.Request(apiurl, data)
             response = urlRequest.urlopen(req)
             result = json.load(response)
-
             if result['success']:
-                return HttpResponse("recaptcha Success")
-            else:
-                return HttpResponse("recaptcha Failed")
-
-            new_data = RegistrationModel(
+                new_data = RegistrationModel(
                 number = len(RegistrationModel.objects.all())+1,
                 coord_id = user_form.cleaned_data['coord_id'],
                 name = user_form.cleaned_data['name'],
@@ -55,7 +52,13 @@ def devview(request):
                 event = event,
                 txn_id = user_form.cleaned_data['txn_id'],
                 amount = user_form.cleaned_data['amount']
-            )
-            new_data.save()
+                )
+                new_data.save()
+                sendEmail(email,event,name=user_form.cleaned_data['name'],phone=user_form.cleaned_data['phone'],college=user_form.cleaned_data['college'],year=user_form.cleaned_data['year'],txn_id=user_form.cleaned_data['txn_id'],amount=user_form.cleaned_data['amount'])
+                return HttpResponse(json.dumps({"message":"success",}),content_type="application/json")
+            else:
+                return HttpResponse(json.dumps({"message":"reCaptcha Verification Failed!",}),content_type="application/json")
+        else:
+            return HttpResponse(json.dumps({"message":"Please re-check the details entered",}),content_type="application/json")
     elif request.method == "GET":
-        return HttpResponseRedirect("/admin")
+        return render(request,'dev/recaptcha.html')
