@@ -58,32 +58,43 @@ def register(request):
     if request.method == "GET":
         return HttpResponseRedirect("/admin")
     elif request.method == "POST":
-        # print(request.POST)
         user_form = RegistrationForm(request.POST)
         event = request.POST['event_selected']
         email = request.POST['email']
+        if 'g-recaptcha-response' not in request.POST.keys() or request.POST['g-recaptcha-response'] == '':
+            return HttpResponse(json.dumps({"message":"Captcha Verification Failed",}),content_type="application/json")
         # add txn_id check here
         if RegistrationModel.objects.filter(txn_id=request.POST['txn_id']):
             return HttpResponse(json.dumps({"message":"Transaction ID is already Registered",}),content_type="application/json")
         if user_form.is_valid():
-            # event = user_form.cleaned_data['event_selected']
-            # email = user_form.cleaned_data['email']
-            new_data = RegistrationModel(
-                number = len(RegistrationModel.objects.all())+1,
-                coord_id = user_form.cleaned_data['coord_id'],
-                name = user_form.cleaned_data['name'],
-                phone = user_form.cleaned_data['phone'],
-                email = email,
-                college = user_form.cleaned_data['college'],
-                year = user_form.cleaned_data['year'],
-                event = event,
-                txn_id = user_form.cleaned_data['txn_id'],
-                amount = user_form.cleaned_data['amount']
-            )
-            new_data.save()
-            #send Email
-            sendEmail(email,event,name=user_form.cleaned_data['name'],phone=user_form.cleaned_data['phone'],college=user_form.cleaned_data['college'],year=user_form.cleaned_data['year'],txn_id=user_form.cleaned_data['txn_id'],amount=user_form.cleaned_data['amount'])
-            return HttpResponse(json.dumps({"message":"success",}),content_type="application/json")
+            recaptcha_response = request.POST['g-recaptcha-response']
+            values = {
+                'secret' : "6LfhvHIUAAAAALdo3dY_Ztr6yty-rXyJ2GK-Ti7-", #FINAL key
+                'response' : recaptcha_response,
+            }
+            data = urllib.parse.urlencode(values)
+            data = data.encode('utf-8')
+            apiurl = "https://www.google.com/recaptcha/api/siteverify"
+            req = urlRequest.Request(apiurl, data)
+            response = urlRequest.urlopen(req)
+            result = json.load(response)
+            if result['success']:
+                new_data = RegistrationModel(
+                    number = len(RegistrationModel.objects.all())+1,
+                    coord_id = user_form.cleaned_data['coord_id'],
+                    name = user_form.cleaned_data['name'],
+                    phone = user_form.cleaned_data['phone'],
+                    email = email,
+                    college = user_form.cleaned_data['college'],
+                    year = user_form.cleaned_data['year'],
+                    event = event,
+                    txn_id = user_form.cleaned_data['txn_id'],
+                    amount = user_form.cleaned_data['amount']
+                )
+                new_data.save()
+                #send Email
+                sendEmail(email,event,name=user_form.cleaned_data['name'],phone=user_form.cleaned_data['phone'],college=user_form.cleaned_data['college'],year=user_form.cleaned_data['year'],txn_id=user_form.cleaned_data['txn_id'],amount=user_form.cleaned_data['amount'])
+                return HttpResponse(json.dumps({"message":"success",}),content_type="application/json")
         elif request.POST['coord_id'] == '':
             return HttpResponse(json.dumps({"message":"No Coordinator ID",}),content_type="application/json")
         else:
