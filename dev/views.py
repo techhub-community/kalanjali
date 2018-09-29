@@ -61,4 +61,4 @@ def devview(request):
         else:
             return HttpResponse(json.dumps({"message":"Please re-check the details entered",}),content_type="application/json")
     elif request.method == "GET":
-        return render(request,'dev/recaptcha.html')
+        return HttpResponseRedirect("/admin")
