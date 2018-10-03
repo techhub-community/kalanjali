@@ -10,7 +10,7 @@ class RegistrationModel(models.Model):
     email = models.CharField(max_length=50)
     college = models.CharField(max_length=50)
     year = models.IntegerField()
-    event = models.CharField(max_length=30)
+    event = models.CharField(max_length=100)
     txn_id = models.CharField(max_length=50,primary_key=True)
     amount = models.IntegerField(default=0)
     verified = models.BooleanField(default=False)
