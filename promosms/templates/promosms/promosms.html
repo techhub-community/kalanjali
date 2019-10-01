@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form class="promosms_form" action="{% url 'promosmsview' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="phone" placeholder="Enter the phone Number">
+    </form>
+    <button type="button" name="submit_btn" id="submit_btn">Send SMS</button>
+  </body>
+  <script type="text/javascript">
+      let promoSmsForm = document.querySelector(".promosms_form")
+      async function sendData(){
+        let apiForm = new FormData(promoSmsForm);;
+        let result = '';
+        await fetch("http://127.0.0.1:8000/sendsms/",{method:"post",body:apiForm,mode:'cors'})
+        .then((response) => (response.json()))
+        .then((data) => {result = data });
+        window.alert(result.message);
+      }
+      document.querySelector("#submit_btn").addEventListener("click",sendData)
+    </script>
+</html>
