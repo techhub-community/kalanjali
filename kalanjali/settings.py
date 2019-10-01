@@ -80,12 +80,8 @@ WSGI_APPLICATION = 'kalanjali.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'kalanjali_db',
-        'USER': 'kalanjali',
-        'PASSWORD': 'devkala2018',
-	'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
