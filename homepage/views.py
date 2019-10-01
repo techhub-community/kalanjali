@@ -38,9 +38,9 @@ def sendEmail(email,event,name,phone,college,year,txn_id,amount):
     <ol style="margin-left:1em">
     	<li>You Will Get A Confirmation SMS Upon Successful Payment Verification On Your Registered Mobile No.</li>
     	<li>If You Have Any Queries Regarding Mismatch Of TRANSACTION ID Or Any Other Data Then Visit:- <a href="http://bit.ly/2zA8DdF">http://bit.ly/2zA8DdF</a></li>
-    	<li>For Downloading Brochure Of Kalanjali-2018 :- <a href="http://bit.ly/2R4snwH">http://bit.ly/2R4snwH</a></li>
-    	<li>For Rules and Regulations Of Kalanjali-2018 :-  <a href="http://bit.ly/2N01GpP">http://bit.ly/2N01GpP</a></li>
-    	<li>For Event Shedule Of Kalanjali-2018 :-  <a href="http://bit.ly/2N63nlG">http://bit.ly/2N63nlG</a></li>
+    	<li>For Downloading Brochure Of Kalanjali-2019 :- <a href="http://bit.ly/2R4snwH">http://bit.ly/2R4snwH</a></li>
+    	<li>For Rules and Regulations Of Kalanjali-2019 :-  <a href="http://bit.ly/2N01GpP">http://bit.ly/2N01GpP</a></li>
+    	<li>For Event Shedule Of Kalanjali-2019 :-  <a href="http://bit.ly/2N63nlG">http://bit.ly/2N63nlG</a></li>
     	<li>Event location :- <a href="http://bit.ly/2IkjdID">http://bit.ly/2IkjdID</a></li>
     </ol>
     <br>
