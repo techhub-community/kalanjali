@@ -40,7 +40,7 @@ def sendEmail(email,event,name,phone,college,year,txn_id,amount):
     	<li>If You Have Any Queries Regarding Mismatch Of TRANSACTION ID Or Any Other Data Then Visit:- <a href="http://bit.ly/2oEfRdt">http://bit.ly/2oEfRdt</a></li>
     	<li>For Downloading Brochure Of Kalanjali-2019 :- <a href="http://bit.ly/2phQC0Y">http://bit.ly/2phQC0Y</a></li>
     	<li>For Rules and Regulations Of Kalanjali-2019 :-  <a href="http://bit.ly/2myK0uh">http://bit.ly/2myK0uh</a></li>
-    	<li>For Event Shedule Of Kalanjali-2019 :-  <a href="http://bit.ly/2o4Ovx9">http://bit.ly/2o4Ovx9</a></li>
+    	<li>For Event Shedule Of Kalanjali-2019 :-  <a href="http://bit.ly/2pt3BgF">http://bit.ly/2pt3BgF</a></li>
     	<li>Event location :- <a href="http://bit.ly/2IkjdID">http://bit.ly/2IkjdID</a></li>
     </ol>
     <br><div style="font-size:18px">
