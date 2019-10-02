@@ -23,32 +23,32 @@ def sendSMS(apikey, numbers, sender, message):
     return (f.read(), f.code)
 
 def sendEmail(email,event,name,phone,college,year,txn_id,amount):
-    html_template = '''<p>Thank You for registering yourself for the event : <b>{event}</b> </p>
-    <p>Your Registration details are :</p>
-    <ul>
-    	<li>Name : {name}</li>
-    	<li>Email : {email}</li>
-    	<li>Phone : {phone}</li>
-    	<li>College : {college}</li>
-    	<li>Year : {year}</li>
-        <li>Paid Amount : {amount}</li>
-        <li>UPI Transaction ID : {txn_id}</li>
+    html_template = '''<div style="font-size:1.6em">Thank You for registering yourself for the event : <b>{event}</b> </div>
+    <br><div style="font-size:1.45em">Your Registration details are :</div>
+    <div style="font-size: 1.3em"> <ul>
+    	<li>Name : Deep</li>
+    	<li>Email : <a href="mailto:deepnarayan006@gmail.com" target="_blank">deepnarayan006@gmail.com</a></li>
+    	<li>Phone : 9982168317</li>
+    	<li>College : gvfdg</li>
+    	<li>Year : 1</li>
+        <li>Paid Amount : 150</li>
+        <li>UPI Transaction ID : gdsdg</li>
     </ul>
-    <b>Note:</b>
-    <ol style="margin-left:1em">
-    	<li>You Will Get A Confirmation SMS Upon Successful Payment Verification On Your Registered Mobile No.</li>
-    	<li>If You Have Any Queries Regarding Mismatch Of TRANSACTION ID Or Any Other Data Then Visit:- <a href="http://bit.ly/2zA8DdF">http://bit.ly/2zA8DdF</a></li>
-    	<li>For Downloading Brochure Of Kalanjali-2019 :- <a href="http://bit.ly/2R4snwH">http://bit.ly/2R4snwH</a></li>
-    	<li>For Rules and Regulations Of Kalanjali-2019 :-  <a href="http://bit.ly/2N01GpP">http://bit.ly/2N01GpP</a></li>
-    	<li>For Event Shedule Of Kalanjali-2019 :-  <a href="http://bit.ly/2N63nlG">http://bit.ly/2N63nlG</a></li>
+    </div>
+    <b style="font-size: 1.3em">Note:</b>
+    <ol style="margin-left:1em;font-size:15px">
+    	<li>If You Have Any Queries Regarding Mismatch Of TRANSACTION ID Or Any Other Data Then Visit:- <a href="http://bit.ly/2oEfRdt">http://bit.ly/2oEfRdt</a></li>
+    	<li>For Downloading Brochure Of Kalanjali-2019 :- <a href="http://bit.ly/2phQC0Y">http://bit.ly/2phQC0Y</a></li>
+    	<li>For Rules and Regulations Of Kalanjali-2019 :-  <a href="http://bit.ly/2myK0uh">http://bit.ly/2myK0uh</a></li>
+    	<li>For Event Shedule Of Kalanjali-2019 :-  <a href="http://bit.ly/2o4Ovx9">http://bit.ly/2o4Ovx9</a></li>
     	<li>Event location :- <a href="http://bit.ly/2IkjdID">http://bit.ly/2IkjdID</a></li>
     </ol>
-    <br>
-    Regards,<br>Team Kalanjali
-    <br><br><span style="font-size:0.7em">Managed By :- TechHub (<a href="http://www.techhub.pro">www.techhub.pro</a>)<br>Coding and Innovation Club of Sir MVIT</span>
+    <br><div style="font-size:22px">
+    Regards,<br>Team Kalanjali</div>
+    <br><span style="font-size:13px;margin-top:5px">Managed By :- TechHub (<a href="http://bit.ly/2ppK2FR">www.techhubmvit.ml</a>)<br>Coding and Innovation Club of Sir MVIT</span>
 
     '''.format(event=event,name=name,email=email,phone=phone,college=college,year=year,txn_id=txn_id,amount=amount)
-    msg = EmailMessage("Registration successful!",html_template,"admin@kalanjali18.in",[email,])
+    msg = EmailMessage("Registration successful!",html_template,"no-reply@kalanjali18.in",[email,])
     msg.content_subtype = "html"
     check = msg.send()
     if check!=1:
