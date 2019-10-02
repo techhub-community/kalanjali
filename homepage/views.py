@@ -97,7 +97,7 @@ def register(request):
                 new_data.save()
                 #send Email
                 sendEmail(email,event,name=user_form.cleaned_data['name'],phone=user_form.cleaned_data['phone'],college=user_form.cleaned_data['college'],year=user_form.cleaned_data['year'],txn_id=user_form.cleaned_data['txn_id'],amount=user_form.cleaned_data['amount'])
-                return HttpResponse(json.dumps({"message":"success",}),content_type="application/json")
+                return HttpResponse(json.dumps({"message":"Your filled in data has been successfully registered with us. Kindly wait for an email from us after we confirm your payment.",}),content_type="application/json")
         elif request.POST['coord_id'] == '':
             return HttpResponse(json.dumps({"message":"No Coordinator ID",}),content_type="application/json")
         else:
