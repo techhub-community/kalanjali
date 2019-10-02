@@ -43,9 +43,9 @@ def sendEmail(email,event,name,phone,college,year,txn_id,amount):
     	<li>For Event Shedule Of Kalanjali-2019 :-  <a href="http://bit.ly/2o4Ovx9">http://bit.ly/2o4Ovx9</a></li>
     	<li>Event location :- <a href="http://bit.ly/2IkjdID">http://bit.ly/2IkjdID</a></li>
     </ol>
-    <br><div style="font-size:22px">
+    <br><div style="font-size:18px">
     Regards,<br>Team Kalanjali</div>
-    <br><span style="font-size:13px;margin-top:5px">Managed By :- TechHub (<a href="http://bit.ly/2ppK2FR">www.techhubmvit.ml</a>)<br>Coding and Innovation Club of Sir MVIT</span>
+    <br><span style="font-size:13px;margin-top:3px">Managed By :- TechHub (<a href="http://bit.ly/2ppK2FR">www.techhubmvit.ml</a>)<br>Coding and Innovation Club of Sir MVIT</span>
 
     '''.format(event=event,name=name,email=email,phone=phone,college=college,year=year,txn_id=txn_id,amount=amount)
     msg = EmailMessage("Registration successful!",html_template,"no-reply@kalanjali18.in",[email,])
