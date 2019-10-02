@@ -101,7 +101,7 @@ def register(request):
         elif request.POST['coord_id'] == '':
             return HttpResponse(json.dumps({"message":"No Coordinator ID",}),content_type="application/json")
         else:
-            return HttpResponse(json.dumps({"message":"error",}),content_type="application/json")
+            return HttpResponse(json.dumps({"message":"There is some ERROR in the filled Form",}),content_type="application/json")
 
 	# elif request.method == "POST":
 	# 	resp, code = sendSMS(apikey='aJOo8nc0mC4-QKjRBPhSt4aFSQBgcXLhgBV7UQdwVY',numbers='91'+request.POST['phone'],message=request.POST['message'],sender='')
