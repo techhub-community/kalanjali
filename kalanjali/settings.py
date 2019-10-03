@@ -135,8 +135,8 @@ STATICFILES_DIRS = [
 
 #Email Integration
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'kalanjali'
-EMAIL_HOST_PASSWORD = 'devkala2018'
+EMAIL_HOST_USER = 'avikantisgod'
+EMAIL_HOST_PASSWORD = 'bombay2010'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
