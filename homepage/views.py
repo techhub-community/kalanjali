@@ -487,6 +487,8 @@ def register(request):
                 #send Email
                 sendEmail(email,event,name=user_form.cleaned_data['name'],phone=user_form.cleaned_data['phone'],college=user_form.cleaned_data['college'],year=user_form.cleaned_data['year'],txn_id=user_form.cleaned_data['txn_id'],amount=user_form.cleaned_data['amount'])
                 return HttpResponse(json.dumps({"message":"Registration Successful. Kindly wait for an email from us after we confirm your payment.",}),content_type="application/json")
+            else:
+                return HttpResponse(json.dumps({"message":"There is some ERROR in the filled Form"}),content_type="application/json")
         elif request.POST['coord_id'] == '':
             return HttpResponse(json.dumps({"message":"No Coordinator ID",}),content_type="application/json")
         else:
