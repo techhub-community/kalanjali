@@ -76,7 +76,7 @@ def register(request):
                 new_data.save()
                 #send Email
                 sendEmail(email,event,name=user_form.cleaned_data['name'],phone=user_form.cleaned_data['phone'],college=user_form.cleaned_data['college'],year=user_form.cleaned_data['year'],txn_id=user_form.cleaned_data['txn_id'],amount=user_form.cleaned_data['amount'])
-                return HttpResponse(json.dumps({"message":"Registration Successful. Kindly wait for an email from us after we confirm your payment.",}),content_type="application/json")
+                return HttpResponse(json.dumps({"message":"Registration Successful. Kindly expect an email from us and see you at Kalanjali 2019.",}),content_type="application/json")
             else:
                 return HttpResponse(json.dumps({"message":"There is some ERROR in the filled Form", "data": json.dumps(result) }),content_type="application/json")
         elif request.POST['coord_id'] == '':
