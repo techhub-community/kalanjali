@@ -26,7 +26,7 @@ def sendSMS(apikey, numbers, sender, message):
     return (f.read(), f.code)
 
 def sendEmail(email,event,name,phone,college,year,txn_id,amount):
-    html_template=render_to_string("/homepage/email.html", {"user": dict(event=event,name=name,email=email,phone=phone,college=college,year=year,txn_id=txn_id,amount=amount)})
+    html_template=render_to_string("homepage/email.html", {"user": dict(event=event,name=name,email=email,phone=phone,college=college,year=year,txn_id=txn_id,amount=amount)})
     msg = EmailMessage("Registration successful!",html_template,"no-reply@kalanjali18.in",[email,])
     msg.content_subtype = "html"
     check = msg.send()
